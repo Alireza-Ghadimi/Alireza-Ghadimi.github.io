@@ -1,0 +1,89 @@
+[
+  {
+    "file": "institution-waterloo-logo.png",
+    "url": "https://uwaterloo.ca/brand/sites/ca.brand/files/universityofwaterloo_logo_horiz_rgb.png",
+    "source_page": "https://uwaterloo.ca/brand/uw-logos",
+    "credit": "University of Waterloo",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 13590
+  },
+  {
+    "file": "institution-toronto-logo.svg",
+    "url": "https://www.utoronto.ca/themes/custom/bootstrap_uoft/logo.svg",
+    "source_page": "https://www.utoronto.ca",
+    "credit": "University of Toronto",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 119511
+  },
+  {
+    "file": "institution-amirkabir-logo.png",
+    "url": "https://aut.ac.ir/templates/tmpl_modern01/images/logo_en.png",
+    "source_page": "https://aut.ac.ir/en",
+    "credit": "Amirkabir University of Technology",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 188705
+  },
+  {
+    "file": "company-huawei-logo.png",
+    "url": "https://www.huawei.com/-/media/hcomponent-header/1.0.1.20260908162100/component/img/huawei_logo.png",
+    "source_page": "https://www.huawei.com/en/",
+    "credit": "Huawei",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 12719
+  },
+  {
+    "file": "company-fusion-logo.png",
+    "url": "https://fusionanalytics.com/wp-content/uploads/2024/06/cropped-logo_fusion_newcolors.png",
+    "source_page": "https://fusionanalytics.com",
+    "credit": "Fusion Analytics",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 27467
+  },
+  {
+    "file": "institution-waterloo-campus.jpg",
+    "url": "https://uwaterloo.ca/brand/sites/ca.brand/files/uploads/images/m3_0.jpg",
+    "source_page": "https://uwaterloo.ca/brand/downloads-and-resources/online-learning-and-virtual-meetings",
+    "credit": "University of Waterloo, Mathematics 3",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 540229
+  },
+  {
+    "file": "institution-toronto-campus.png",
+    "url": "https://www.utoronto.ca/sites/default/files/2026-10/convocation-hall.png",
+    "source_page": "https://www.utoronto.ca",
+    "credit": "University of Toronto, Convocation Hall",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 741973
+  },
+  {
+    "file": "company-strayos-logo.svg",
+    "source_page": "https://strayos.com",
+    "credit": "Strayos",
+    "license": "Official logo; trademark retained by Strayos.",
+    "note": "Extracted exact inline SVG from official homepage."
+  },
+  {
+    "file": "leaflab-logo-green-puzzle.png",
+    "credit": "Alireza Ghadimi \u2014 original logo sketch; digitized with Imagegen",
+    "source": "leaflab-brand/leaflab-logo-green-puzzle-v3.png",
+    "note": "Approved green logo with subtle puzzle-piece shadows and clockwise rotation. Transparent PNG."
+  },
+  {
+    "file": "ag-signature.png",
+    "credit": "Alireza Ghadimi",
+    "source": "User-supplied AG signature image",
+    "note": "Original bitmap unchanged. White margins cropped and background blended through CSS."
+  },
+  {
+    "file": "alireza-portrait-original.jpg",
+    "credit": "Original photograph supplied by Alireza Ghadimi",
+    "source": "User-supplied IMG_6620.jpeg",
+    "note": "Unchanged original photo. Display-only brightness(1.12) and an SVG viewport crop exclude the chair and feet without regenerating or reshaping the subject."
+  },
+  {
+    "file": "institution-amirkabir-campus.png",
+    "credit": "Photograph supplied by Alireza Ghadimi",
+    "source": "User-supplied Amirkabir University campus image",
+    "note": "Original supplied image copied unchanged; displayed on the Amirkabir education card."
+  }
+]
