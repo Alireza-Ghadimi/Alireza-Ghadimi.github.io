@@ -1,10 +1,7 @@
-/* Browser checks for the separate animated edition. Run against a local server. */
+/* Browser checks for the public animated homepage. Run against a local server. */
 const assert = require('node:assert/strict');
 const {chromium} = require('playwright');
 const base = process.env.SITE_URL || 'http://127.0.0.1:4173';
-const contentSelectors = '.hero-thesis,.hero-bio,.perspective-copy,.work-card-body,.experience-row,.publication,.education-body,.case-dialog,.leaflab-inner';
-const normalize = text => text.replace(/\s+/g, ' ').trim();
-
 (async () => {
   const browser = await chromium.launch({headless: true, ...(process.env.CHROMIUM_PATH ? {executablePath: process.env.CHROMIUM_PATH} : {})});
   const errors = [];
@@ -16,21 +13,13 @@ const normalize = text => text.replace(/\s+/g, ' ').trim();
   });
   const gifCount = () => page.locator('.project-motion[src$=".gif"]').count();
   try {
-    for (const full of [false, true]) {
-      const suffix = full ? 'full-profile/' : '';
-      await page.goto(`${base}/${suffix}`);
-      const classic = (await page.locator(contentSelectors).allTextContents()).map(normalize);
-      await page.goto(`${base}/animated/${suffix}`);
-      assert.deepEqual((await page.locator(contentSelectors).allTextContents()).map(normalize), classic, 'Portfolio content changed');
-      assert.equal(await page.locator('h1').innerText(), 'Alireza\nGhadimi.');
-      assert.equal(new URL(await page.locator('.motion-controls a').getAttribute('href'), page.url()).pathname, `/${suffix}`);
-      assert.equal(await page.locator('.project-motion').count(), 15);
-      const resumes = await page.locator('a[download]').evaluateAll(nodes => nodes.map(node => node.href));
-      assert.equal(resumes.length, 2);
-      assert(resumes.every(url => url.includes(full ? 'Resume-Full.pdf' : 'Resume.pdf')));
-    }
-
-    await page.goto(`${base}/animated/`);
+    await page.goto(`${base}/animated/?from=bookmark#work`);
+    await page.waitForURL(`${base}/?from=bookmark#work`);
+    await page.goto(`${base}/`);
+    assert.equal(await page.locator('h1').innerText(), 'Alireza\nGhadimi.');
+    assert.equal(await page.locator('.project-motion').count(), 15);
+    const resumes = await page.locator('a[download]').evaluateAll(nodes => nodes.map(node => new URL(node.href).pathname));
+    assert.deepEqual(resumes, Array(2).fill('/assets/Alireza-Ghadimi-Resume.pdf'));
     await page.waitForTimeout(1500);
     assert.equal(await gifCount(), 0, 'Offscreen GIFs should start as posters');
     const data = await page.locator('#category-data').textContent().then(JSON.parse);
@@ -71,7 +60,7 @@ const normalize = text => text.replace(/\s+/g, ' ').trim();
 
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({width, height: 900});
-      await page.goto(`${base}/animated/`);
+      await page.goto(`${base}/`);
       await page.waitForTimeout(1500);
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow at ${width}px`);
       if (width < 641) {
@@ -88,7 +77,7 @@ const normalize = text => text.replace(/\s+/g, ' ').trim();
     }
 
     await page.emulateMedia({reducedMotion: 'reduce'});
-    await page.goto(`${base}/animated/`);
+    await page.goto(`${base}/`);
     await page.locator('.project-motion').first().scrollIntoViewIfNeeded();
     assert(await page.locator('#motion-toggle').isDisabled());
     assert.equal(await gifCount(), 0);
@@ -96,13 +85,13 @@ const normalize = text => text.replace(/\s+/g, ' ').trim();
     assert.equal(await page.evaluate(() => document.getAnimations().filter(a => a.playState === 'running').length), 0);
     const offline = await browser.newContext({javaScriptEnabled: false, viewport: {width: 390, height: 844}});
     const fallback = await offline.newPage();
-    await fallback.goto(`${base}/animated/`);
+    await fallback.goto(`${base}/`);
     assert.equal(await fallback.locator('.work-card:visible').count(), 15);
     assert.equal(await fallback.locator('.project-motion[src$=".png"]').count(), 15);
     assert.equal(await fallback.locator('.motion-controls:visible').count(), 0);
     await offline.close();
     assert.deepEqual(errors, []);
-    console.log('PASS: identical content, both profiles, 15 dialogs, 6 tabs, GIF visibility/pause, persistent preference, reduced motion, no-JS fallback, mobile menu, and responsive scrolling.');
+    console.log('PASS: public homepage, legacy redirect, 15 dialogs, 6 tabs, GIF visibility/pause, persistent preference, reduced motion, no-JS fallback, mobile menu, and responsive scrolling.');
   } finally {
     await browser.close();
   }
