@@ -72,17 +72,16 @@
     "note": "Original supplied image copied unchanged; displayed on the Amirkabir education card."
   },
   {
-    "file": "company-huawei-logo.png",
-    "url": "https://www.huawei.com/-/media/hcomponent-header/1.0.1.20260908162100/component/img/huawei_logo.png",
-    "source_page": "https://www.huawei.com/en/",
-    "credit": "Huawei",
-    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
-    "bytes": 12719
-  },
-  {
     "file": "fonts/",
     "credit": "DM Sans and Instrument Serif contributors",
     "license": "SIL Open Font License 1.1; bundled in assets/fonts/",
     "source": "https://github.com/google/fonts"
+  },
+  {
+    "file": "company-strayos-logo.svg",
+    "source_page": "https://strayos.com",
+    "credit": "Strayos",
+    "license": "Official logo; trademark retained by Strayos.",
+    "note": "Extracted exact inline SVG from official homepage."
   }
 ]
