@@ -1,0 +1,497 @@
+{
+  "categories": [
+    {
+      "id": "selected",
+      "label": "Selected work",
+      "title": "Agentic AI and generative models, in practice.",
+      "description": "Learned skills, execution feedback, reusable memory, efficient generation, and retrieval-grounded applications."
+    },
+    {
+      "id": "agents",
+      "label": "Agentic AI in industry",
+      "title": "Agents that learn from what they do.",
+      "description": "Industry research on learned skills, execution feedback, and reliable evaluation, alongside academic work on reusable agent memory."
+    },
+    {
+      "id": "genai",
+      "label": "Generative AI",
+      "title": "Generating, retrieving, and adapting.",
+      "description": "Conditional image generation, retrieval-grounded applications, and research on adapting pretrained language models for diffusion-based generation."
+    },
+    {
+      "id": "llm",
+      "label": "LLMs & transformers",
+      "title": "More useful computation. Less wasted work.",
+      "description": "Linear attention, multi-token generation, compact skill representations, and model implementations shaped by the realities of GPU execution."
+    },
+    {
+      "id": "vision",
+      "label": "Industrial computer vision",
+      "title": "Perception that works beyond the experiment.",
+      "description": "RGB–hyperspectral fusion, road-scene segmentation, active learning, and the engineering that moves models into production."
+    },
+    {
+      "id": "biomedical",
+      "label": "Biomedical research",
+      "title": "Understanding signals. Modeling the nervous system.",
+      "description": "Computational neuroscience, EEG representation learning, and physiological sensing—from my biomedical engineering background to ongoing research."
+    }
+  ],
+  "projects": [
+    {
+      "id": "softskill",
+      "title": "Compact skills for language-model agents",
+      "short": "SoftSkill on Qwen3-8B",
+      "categories": [
+        "agents",
+        "llm"
+      ],
+      "featured": true,
+      "visual": "skills",
+      "context": "Reproduction & extension",
+      "status": "Evaluated research",
+      "summary": "Reproduced SoftSkill on <strong>Qwen3-8B</strong>, evaluating how 32 learned vectors compare with a long text skill across accuracy, context use, and evaluation reliability.",
+      "tags": [
+        "Qwen3-8B",
+        "Learned embeddings",
+        "Evaluation"
+      ],
+      "problem": "Long natural-language skill documents consume context. Can a compact learned representation retain their usefulness on a different language model?",
+      "contributions": [
+        "Adapted the upstream SoftSkill research code to Qwen3-8B and compared learned skills, text instructions, and untrained initializations.",
+        "Reproduced the SearchQA comparison across three seeds and investigated the contribution of training versus initialization.",
+        "Identified a decoding-budget confound in LiveMath and documented the limits of a 200-question ToolQA pilot."
+      ],
+      "evidence": "The public repository reports 74.2 ± 0.3% SearchQA test-hard accuracy with 32 trained vectors, compared with 71.7% for a 1,995-token text skill and 67.9% without skills. This result is specific to that benchmark and evaluation setup.",
+      "benchmark": true,
+      "note": "Reproduction and extension of Tao et al.’s SoftSkill method. The upstream method and code are credited in the repository; this is distinct from the EdgeAlign prototype.",
+      "links": [
+        {
+          "label": "Code & evaluation report",
+          "url": "https://github.com/Alireza-Ghadimi/SoftSkill"
+        }
+      ]
+    },
+    {
+      "id": "edgealign",
+      "title": "Learning skills from execution feedback",
+      "short": "EdgeAlign",
+      "categories": [
+        "agents"
+      ],
+      "featured": true,
+      "visual": "feedback",
+      "context": "Industry agent research",
+      "status": "Research prototype",
+      "summary": "Designed <strong>forward-only reinforcement learning</strong> with evolution strategies over a 512-dimensional skill subspace.",
+      "tags": [
+        "Evolution strategies",
+        "vLLM",
+        "Agent skills"
+      ],
+      "problem": "Agents need ways to improve after deployment under constraints on compute and context. Updating compact skill representations is one way to study improvement without changing the full model.",
+      "contributions": [
+        "Designed gradient-free optimization of learned agent skills using evolution strategies in a 512-dimensional subspace.",
+        "Developed prompt-embedding and execution support around Qwen3-8B and vLLM.",
+        "Investigated user feedback and tool-call outcomes as signals for skill improvement.",
+        "Worked on sandboxed evaluation, truncation diagnostics, and training stability."
+      ],
+      "evidence": "Prototype work on learned skill optimization, runtime support, and execution-based evaluation.",
+      "note": "Forward-only optimization and SoftSkill reproduction are separate research efforts.",
+      "links": []
+    },
+    {
+      "id": "armd",
+      "title": "Rethinking one-token-at-a-time generation",
+      "short": "ARMD-QWEN",
+      "categories": [
+        "llm",
+        "genai"
+      ],
+      "featured": true,
+      "visual": "tokens",
+      "context": "University of Waterloo · Research",
+      "status": "In progress",
+      "summary": "Adapting pretrained Qwen models for <strong>masked diffusion and parallel multi-token generation</strong>, while reusing existing model weights.",
+      "tags": [
+        "Masked diffusion",
+        "Qwen",
+        "Multi-token generation"
+      ],
+      "problem": "Autoregressive generation proceeds one token at a time. Adapting a pretrained model to a masked-diffusion formulation offers a way to investigate parallel generation without starting training from scratch.",
+      "contributions": [
+        "Adapting and fine-tuning Qwen-family models into an Auto-Regressive Masked Diffusion formulation.",
+        "Investigating parallel multi-token generation while preserving the value of pretrained weights.",
+        "Building on Karami and Ghodsi’s ARMD framework; the public QWEN-ARMDE repository provides related training and inference infrastructure."
+      ],
+      "evidence": "Ongoing research on masked-diffusion adaptation. The public QWEN-ARMDE repository contains related training and inference infrastructure.",
+      "note": "Building on Karami and Ghodsi’s Auto-Regressive Masked Diffusion framework.",
+      "links": [
+        {
+          "label": "Research code",
+          "url": "https://github.com/Alireza-Ghadimi/QWEN-ARMDE"
+        }
+      ]
+    },
+    {
+      "id": "skill-memory",
+      "title": "A memory that carries skills forward",
+      "short": "Context-aware skill memory",
+      "categories": [
+        "agents",
+        "llm"
+      ],
+      "featured": true,
+      "visual": "memory",
+      "context": "University of Waterloo · Research",
+      "status": "Ongoing research",
+      "summary": "Investigating <strong>gated low-rank updates to recurrent state</strong> so a frozen language model can carry useful task knowledge through tool use.",
+      "tags": [
+        "Recurrent state",
+        "Skill memory",
+        "Qwen3.5-9B"
+      ],
+      "problem": "Repeated instructions are costly, and an agent’s task context can be lost as it interacts with tools. Recurrent state offers a different place to study reusable skills.",
+      "contributions": [
+        "Implemented state capture, injection, and cache-aware serving for Qwen3.5-9B.",
+        "Verified recovery of the top-choice continuation in a controlled fp32 test.",
+        "Developing gated low-rank skill updates to frozen recurrent state.",
+        "Designing transfer studies on unseen tasks and skill combinations, comparing success, retention, and cost."
+      ],
+      "evidence": "State-handling implementation and a controlled continuation-recovery check are complete. Skill-update methods and broader transfer studies remain ongoing.",
+      "note": "Waterloo research on reusable memory through tool interactions.",
+      "links": []
+    },
+    {
+      "id": "document-rag",
+      "title": "Giving documents a useful interface",
+      "short": "Intelligent document RAG",
+      "categories": [
+        "genai"
+      ],
+      "featured": true,
+      "visual": "retrieval",
+      "context": "Independent project",
+      "status": "Exploratory application",
+      "summary": "Built a document-retrieval project around <strong>PDF ingestion, a local vector store, and an API</strong> for retrieval-grounded applications.",
+      "tags": [
+        "Document ingestion",
+        "Chroma",
+        "Retrieval"
+      ],
+      "problem": "A collection of documents is useful only if relevant information can be retrieved and brought into a model’s context when needed.",
+      "contributions": [
+        "Organized document ingestion and retrieval components in a Python application.",
+        "Used a local Chroma database to support experiments with document-based retrieval.",
+        "Built an API-oriented project structure for exploring retrieval-grounded applications."
+      ],
+      "evidence": "The public repository contains the implementation and a small set of research PDFs used for experimentation.",
+      "note": "Exploratory application with a local vector store and API.",
+      "links": [
+        {
+          "label": "Explore the repository",
+          "url": "https://github.com/Alireza-Ghadimi/intelligent-doc-rag"
+        }
+      ]
+    },
+    {
+      "id": "linear-attention",
+      "title": "Longer context, practical computation",
+      "short": "Linear attention & GPU execution",
+      "categories": [
+        "llm"
+      ],
+      "featured": true,
+      "visual": "attention",
+      "context": "University of Waterloo · Research",
+      "status": "Research & benchmarking",
+      "summary": "Developed and evaluated <strong>linear-attention variants</strong>, with reproducible latency/throughput measurements and GPU-aware implementations.",
+      "tags": [
+        "Linear attention",
+        "PyTorch",
+        "Triton"
+      ],
+      "problem": "An architecture is useful only if its computational advantages survive implementation. Long-context research requires attention to both model behavior and GPU execution.",
+      "contributions": [
+        "Implemented attention and Transformer architectures in a research training and evaluation stack.",
+        "Benchmarked latency and throughput under reproducible settings.",
+        "Adapted model blocks to existing Triton kernels and GPU-friendly dataflows."
+      ],
+      "evidence": "Academic research and implementation work. My FLA repository is a research fork of the upstream Flash Linear Attention project.",
+      "note": "Implementation builds on the upstream Flash Linear Attention project and its GPU kernels, linked below.",
+      "links": [
+        {
+          "label": "Research fork",
+          "url": "https://github.com/Alireza-Ghadimi/flash-linear-attention"
+        },
+        {
+          "label": "Upstream FLA",
+          "url": "https://github.com/fla-org/flash-linear-attention"
+        }
+      ]
+    },
+    {
+      "id": "multimodal",
+      "title": "Seeing beyond RGB",
+      "short": "Multimodal industrial perception",
+      "categories": [
+        "vision"
+      ],
+      "featured": false,
+      "visual": "spectra",
+      "context": "EnerSoft · Industry",
+      "status": "Production ML",
+      "summary": "Built <strong>RGB–hyperspectral perception</strong> systems and sensor-fusion workflows that reduced manual-review costs by <strong>$200K annually</strong>.",
+      "tags": [
+        "Sensor fusion",
+        "U-Net",
+        "Hyperspectral learning"
+      ],
+      "problem": "Visual appearance alone is not enough to distinguish mineral structures reliably. Industrial workflows also need scalable processing and models that remain useful in production.",
+      "contributions": [
+        "Developed and deployed models combining RGB imagery with hyperspectral measurements.",
+        "Worked on U-Net sulfide segmentation, pixel-accurate multimodal registration, and unsupervised mineral discovery.",
+        "Developed learnable spectral representations using RBF-style basis functions, alongside scalable training and distributed evaluation.",
+        "Led production troubleshooting for more than six months, coordinating failure analysis, fixes, and model-performance improvements."
+      ],
+      "evidence": "Across the multimodal perception work at EnerSoft, improved sensor fusion reduced annual manual-review costs by $200K. The work also included legacy-code refactoring and more reliable training and inference workflows.",
+      "note": "Industry work at EnerSoft, May 2022–December 2024. Company systems and datasets are not presented as public repositories.",
+      "links": []
+    },
+    {
+      "id": "road-vision",
+      "title": "From road imagery to actionable inspection",
+      "short": "Road segmentation & active learning",
+      "categories": [
+        "vision"
+      ],
+      "featured": false,
+      "visual": "roads",
+      "context": "Strayos · Industry",
+      "status": "End-to-end model ownership",
+      "summary": "Owned <strong>road-scene segmentation and anomaly detection</strong> from data curation to deployment, with human feedback driving model improvement.",
+      "tags": [
+        "ResUNet",
+        "SAM3D",
+        "Active learning"
+      ],
+      "problem": "Road imagery varies across conditions, and rare failures are precisely the cases an inspection workflow needs to surface. The data and retraining loop matter as much as the model.",
+      "contributions": [
+        "Owned the modeling workflow from dataset curation and labeling strategy through training, evaluation, and deployment.",
+        "Developed a cascaded ResUNet–SAM3D approach for road-scene analysis.",
+        "Built human-in-the-loop annotation and active-learning workflows.",
+        "Analyzed recurring failures, prioritized edge cases, and incorporated corrected annotations into retraining."
+      ],
+      "evidence": "Industry work at Strayos, January–July 2026, spanning model development and the data feedback loop.",
+      "note": "Computer vision engineering at Strayos, January–July 2026.",
+      "links": []
+    },
+    {
+      "id": "neural-dynamics",
+      "title": "Inferring the dynamics behind neural signals",
+      "short": "Synaptic dynamics & deep brain stimulation",
+      "categories": [
+        "biomedical"
+      ],
+      "featured": false,
+      "visual": "signals",
+      "context": "University of Toronto · Research",
+      "status": "Published · PLOS ONE",
+      "summary": "Developed a <strong>computational modeling and inference framework</strong> for short-term synaptic plasticity during deep brain stimulation.",
+      "tags": [
+        "Neural dynamics",
+        "Dual optimization",
+        "Signal processing"
+      ],
+      "problem": "Recorded neural responses contain information about how synapses change under stimulation. Recovering those dynamics requires a model that connects observations to the underlying processes.",
+      "contributions": [
+        "Developed a computational framework and inference algorithm for short-term synaptic plasticity from neural recordings.",
+        "Connected stochastic modeling and signal processing to a biomedical research question during my master’s at the University of Toronto.",
+        "Worked with supervisors Milad Lankarany and Milos R. Popovic; the resulting research was published in PLOS ONE in 2022."
+      ],
+      "evidence": "Published paper: “Inferring stimulation induced short-term synaptic plasticity dynamics using novel dual optimization algorithm.”",
+      "note": "Master’s research at the University of Toronto; published in PLOS ONE in 2022.",
+      "links": [
+        {
+          "label": "Read the published paper",
+          "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0273699"
+        }
+      ]
+    },
+    {
+      "id": "eeg",
+      "title": "Learning identity from EEG",
+      "short": "Contrastive EEG representations",
+      "categories": [
+        "biomedical"
+      ],
+      "featured": false,
+      "visual": "eeg",
+      "context": "Biomedical machine learning",
+      "status": "Research",
+      "summary": "Designed a <strong>contrastive learning objective</strong> for identity-discriminative EEG representations and genuine-user versus impostor separation.",
+      "tags": [
+        "EEG",
+        "Contrastive learning",
+        "Authentication"
+      ],
+      "problem": "Useful EEG representations must capture distinguishing signals while accounting for the variability of neural measurements.",
+      "contributions": [
+        "Designed a contrastive loss for EEG-based authentication.",
+        "Developed representation-learning methods that emphasize separation between individuals.",
+        "Investigated features intended to distinguish genuine-user and impostor representations."
+      ],
+      "evidence": "Method-development experience in EEG authentication. Separate collaborative work on EEG foundation-model soft biometrics is listed among manuscripts in preparation.",
+      "note": "Research on contrastive representations for EEG authentication.",
+      "links": []
+    },
+    {
+      "id": "physiological-sensing",
+      "title": "From physiological signals to working prototypes",
+      "short": "ECG, PPG & signal separation",
+      "categories": [
+        "biomedical"
+      ],
+      "featured": false,
+      "visual": "ecg",
+      "context": "Academic engineering projects",
+      "status": "Prototype & signal research",
+      "summary": "Combined <strong>adaptive filtering, Kalman methods, and wearable sensing</strong> across maternal–fetal ECG separation and an ECG–PPG prototype.",
+      "tags": [
+        "ECG / PPG",
+        "Kalman filtering",
+        "Embedded sensing"
+      ],
+      "problem": "Physiological measurements mix sources and noise. Useful monitoring begins with both a reliable acquisition path and signal-processing methods that recover the information of interest.",
+      "contributions": [
+        "Applied adaptive and Kalman filtering to separate maternal and fetal ECG signals.",
+        "Designed a single-arm ECG and PPG measurement circuit for my undergraduate final project.",
+        "Integrated signal acquisition with Android communication."
+      ],
+      "evidence": "Academic project work spanning signal separation and a wearable sensing prototype at Amirkabir University of Technology.",
+      "note": "Academic research and a sensing prototype; the wearable system was my undergraduate final project.",
+      "links": []
+    },
+    {
+      "id": "colorization",
+      "title": "Learning to add color",
+      "short": "Conditional image generation",
+      "categories": [
+        "genai"
+      ],
+      "featured": false,
+      "visual": "color",
+      "context": "Deep-learning coursework",
+      "status": "Experiment",
+      "summary": "Implemented a <strong>conditional GAN in PyTorch</strong> for image colorization, connecting representation learning with image-to-image generation.",
+      "tags": [
+        "Conditional GAN",
+        "PyTorch",
+        "Image-to-image"
+      ],
+      "problem": "Colorization asks a model to generate plausible chromatic information while remaining consistent with the structure of an input image.",
+      "contributions": [
+        "Implemented a conditional GAN for image colorization in PyTorch.",
+        "Explored conditional generation as a deep-learning final project."
+      ],
+      "evidence": "Implemented as part of a deep-learning final project.",
+      "note": "Conditional image generation in PyTorch.",
+      "links": []
+    },
+    {
+      "id": "geological-generation",
+      "title": "Exploring generative data for perception",
+      "short": "Hyperspectral image augmentation",
+      "categories": [
+        "genai",
+        "vision"
+      ],
+      "featured": false,
+      "visual": "generation",
+      "context": "Generative vision experiments",
+      "status": "Exploratory project",
+      "summary": "Explored <strong>conditional generative models</strong> for augmenting hyperspectral geological imagery used in perception workflows.",
+      "tags": [
+        "Conditional generation",
+        "Hyperspectral data",
+        "Augmentation"
+      ],
+      "problem": "Specialized industrial imagery can be scarce. Conditional generation offers a way to explore additional training examples while respecting the structure of the source data.",
+      "contributions": [
+        "Worked on a conditional GAN approach to generate hyperspectral geological imagery.",
+        "Explored its use as data augmentation for downstream perception models."
+      ],
+      "evidence": "Explored generated hyperspectral examples as additional data for perception workflows.",
+      "note": "Exploratory generative-vision project.",
+      "links": []
+    },
+    {
+      "id": "face-representations",
+      "title": "Representations across pose and appearance",
+      "short": "Faces, landmarks & heatmaps",
+      "categories": [
+        "vision"
+      ],
+      "featured": false,
+      "visual": "landmarks",
+      "context": "Open-source experiments",
+      "status": "Implementation & ablations",
+      "summary": "Combined <strong>RGB inputs and landmark heatmaps</strong> in face-recognition experiments, with pose, image quality, and baseline comparisons.",
+      "tags": [
+        "ResNet-50",
+        "MediaPipe",
+        "ArcFace / CosFace"
+      ],
+      "problem": "Pose and image quality create difficult failure modes for recognition. Landmark information provides an additional representation to test against RGB-only baselines.",
+      "contributions": [
+        "Built a modular PyTorch project combining RGB images and landmark heatmap channels.",
+        "Supported ArcFace/CosFace heads, optional masks, and aligned transforms.",
+        "Explored landmark autoencoding and evaluated recognition across varying pose and image quality."
+      ],
+      "evidence": "Public code includes ablations, classification/verification metrics, and experiment notebooks.",
+      "note": "Open-source experiments with recognition baselines and ablations.",
+      "links": [
+        {
+          "label": "Heatmap experiments",
+          "url": "https://github.com/Alireza-Ghadimi/face-rec-heatmaps"
+        },
+        {
+          "label": "Pose & quality studies",
+          "url": "https://github.com/Alireza-Ghadimi/attention-invariant-face-recognition"
+        }
+      ]
+    },
+    {
+      "id": "mlops",
+      "title": "Making a model reproducible to run",
+      "short": "MLOps vision service",
+      "categories": [
+        "vision"
+      ],
+      "featured": false,
+      "visual": "service",
+      "context": "ML engineering project",
+      "status": "Working implementation",
+      "summary": "Packaged a vision model as a <strong>containerized FastAPI service</strong> with automated checks and reproducible deployment workflows.",
+      "tags": [
+        "FastAPI",
+        "Docker",
+        "GitHub Actions"
+      ],
+      "problem": "A trained model is only one part of a usable system. Packaging, interfaces, and repeatable checks make the implementation easier to run and change.",
+      "contributions": [
+        "Built a containerized FastAPI service for MNIST inference.",
+        "Structured the Python package for reproducible installation and execution.",
+        "Added GitHub Actions checks around the implementation."
+      ],
+      "evidence": "Public repository with the service implementation and CI configuration.",
+      "note": "An engineering demonstration built around a small vision model.",
+      "links": [
+        {
+          "label": "Code & service",
+          "url": "https://github.com/Alireza-Ghadimi/mlops-vision-service"
+        }
+      ]
+    }
+  ]
+}

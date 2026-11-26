@@ -48,13 +48,6 @@
     "bytes": 741973
   },
   {
-    "file": "company-strayos-logo.svg",
-    "source_page": "https://strayos.com",
-    "credit": "Strayos",
-    "license": "Official logo; trademark retained by Strayos.",
-    "note": "Extracted exact inline SVG from official homepage."
-  },
-  {
     "file": "leaflab-logo-green-puzzle.png",
     "credit": "Alireza Ghadimi \u2014 original logo sketch; digitized with Imagegen",
     "source": "leaflab-brand/leaflab-logo-green-puzzle-v3.png",
@@ -77,5 +70,19 @@
     "credit": "Photograph supplied by Alireza Ghadimi",
     "source": "User-supplied Amirkabir University campus image",
     "note": "Original supplied image copied unchanged; displayed on the Amirkabir education card."
+  },
+  {
+    "file": "company-huawei-logo.png",
+    "url": "https://www.huawei.com/-/media/hcomponent-header/1.0.1.20260908162100/component/img/huawei_logo.png",
+    "source_page": "https://www.huawei.com/en/",
+    "credit": "Huawei",
+    "license": "Official organization asset; copyright/trademark retained by respective owner. No open license asserted.",
+    "bytes": 12719
+  },
+  {
+    "file": "fonts/",
+    "credit": "DM Sans and Instrument Serif contributors",
+    "license": "SIL Open Font License 1.1; bundled in assets/fonts/",
+    "source": "https://github.com/google/fonts"
   }
 ]
