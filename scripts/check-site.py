@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the two built profiles and their local links before publication."""
+"""Validate both editions, their two profiles, and local assets before publication."""
 from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
@@ -19,19 +19,24 @@ class Page(HTMLParser):
         attrs = dict(attrs)
         if 'id' in attrs:
             self.ids.append(attrs['id'])
-        for name in ('href', 'src'):
+        for name in ('href', 'src', 'data-gif', 'data-poster'):
             if attrs.get(name):
                 self.links.append(attrs[name])
         if tag == 'a' and 'download' in attrs:
             self.resumes.append(attrs['href'])
 
-for relative in ('index.html', 'full-profile/index.html', 'credits.html', 'full-profile/credits.html'):
+pages = [f'{edition}{profile}{name}'
+         for edition in ('', 'animated/')
+         for profile in ('', 'full-profile/')
+         for name in ('index.html', 'credits.html')]
+for relative in pages:
     path = ROOT / relative
     source = path.read_text()
     page = Page(source)
     assert len(page.ids) == len(set(page.ids)), f'Duplicate IDs: {relative}'
     assert 'beyond kernel dynamics' not in source.lower()
-    if relative in ('index.html', 'credits.html'):
+    full = 'full-profile/' in relative
+    if not full:
         assert 'huawei' not in source.lower() and 'openjiuwen' not in source.lower()
     for value in page.links:
         url = urlsplit(value)
@@ -44,11 +49,15 @@ for relative in ('index.html', 'full-profile/index.html', 'credits.html', 'full-
         assert target.is_relative_to(ROOT), f'Path outside site: {value}'
         assert target.exists(), f'Missing asset {relative}: {value}'
     if relative.endswith('index.html'):
-        expected = 'Alireza-Ghadimi-Resume-Full.pdf' if relative.startswith('full-profile') else 'Alireza-Ghadimi-Resume.pdf'
+        expected = 'Alireza-Ghadimi-Resume-Full.pdf' if full else 'Alireza-Ghadimi-Resume.pdf'
         assert len(page.resumes) == 2 and all(expected in url for url in page.resumes)
         assert len([i for i in page.ids if i.startswith('case-')]) == 15
-        if relative.startswith('full-profile'):
+        if full:
             assert 'Huawei' in source and 'OpenJiuwen' in source
+        if relative.startswith('animated/'):
+            assert source.count('class="project-motion"') == 15
+            assert 'id="motion-toggle"' in source
+            assert 'name="robots" content="noindex,follow"' in source
 
 for full in (False, True):
     path = ROOT / 'assets' / ('Alireza-Ghadimi-Resume-Full.pdf' if full else 'Alireza-Ghadimi-Resume.pdf')
@@ -62,4 +71,13 @@ assert hashlib.sha256(portrait.read_bytes()).hexdigest() == 'd9065603cb2be55e47d
 data = json.loads((ROOT / 'content/portfolio.json').read_text())
 assert len(data['categories']) == 6 and len(data['projects']) == 15
 assert len(set(p['id'] for p in data['projects'])) == 15
-print('PASS: both profiles, 15 case studies, local links, matching résumés, exclusions, and original portrait.')
+motion = ROOT / 'assets/project-motion'
+manifest = json.loads((motion / 'manifest.json').read_text())
+assert set(manifest) == {p['id'] for p in data['projects']}
+for item in manifest.values():
+    gif = motion / item['gif']
+    assert gif.read_bytes().startswith(b'GIF89a')
+    assert gif.stat().st_size == item['bytes']
+    assert (motion / item['poster']).exists()
+    assert item['frames'] == 48 and (item['width'], item['height']) == (600, 260)
+print('PASS: 4 profile pages, 4 credit pages, 15 case studies and GIFs, local links, matching résumés, exclusions, and original portrait.')

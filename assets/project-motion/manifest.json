@@ -1,0 +1,152 @@
+{
+  "softskill": {
+    "gif": "softskill.gif",
+    "poster": "softskill.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 188953,
+    "description": "SoftSkill on Qwen3-8B \u2014 conceptual method animation"
+  },
+  "edgealign": {
+    "gif": "edgealign.gif",
+    "poster": "edgealign.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 126037,
+    "description": "EdgeAlign \u2014 conceptual method animation"
+  },
+  "armd": {
+    "gif": "armd.gif",
+    "poster": "armd.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 102473,
+    "description": "ARMD-QWEN \u2014 conceptual method animation"
+  },
+  "skill-memory": {
+    "gif": "skill-memory.gif",
+    "poster": "skill-memory.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 143403,
+    "description": "Context-aware skill memory \u2014 conceptual method animation"
+  },
+  "document-rag": {
+    "gif": "document-rag.gif",
+    "poster": "document-rag.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 96438,
+    "description": "Intelligent document RAG \u2014 conceptual method animation"
+  },
+  "linear-attention": {
+    "gif": "linear-attention.gif",
+    "poster": "linear-attention.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 174607,
+    "description": "Linear attention & GPU execution \u2014 conceptual method animation"
+  },
+  "multimodal": {
+    "gif": "multimodal.gif",
+    "poster": "multimodal.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 141987,
+    "description": "Multimodal industrial perception \u2014 conceptual method animation"
+  },
+  "road-vision": {
+    "gif": "road-vision.gif",
+    "poster": "road-vision.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 89490,
+    "description": "Road segmentation & active learning \u2014 conceptual method animation"
+  },
+  "neural-dynamics": {
+    "gif": "neural-dynamics.gif",
+    "poster": "neural-dynamics.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 170688,
+    "description": "Synaptic dynamics & deep brain stimulation \u2014 conceptual method animation"
+  },
+  "eeg": {
+    "gif": "eeg.gif",
+    "poster": "eeg.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 236144,
+    "description": "Contrastive EEG representations \u2014 conceptual method animation"
+  },
+  "physiological-sensing": {
+    "gif": "physiological-sensing.gif",
+    "poster": "physiological-sensing.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 222076,
+    "description": "ECG, PPG & signal separation \u2014 conceptual method animation"
+  },
+  "colorization": {
+    "gif": "colorization.gif",
+    "poster": "colorization.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 74730,
+    "description": "Conditional image generation \u2014 conceptual method animation"
+  },
+  "geological-generation": {
+    "gif": "geological-generation.gif",
+    "poster": "geological-generation.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 106411,
+    "description": "Hyperspectral image augmentation \u2014 conceptual method animation"
+  },
+  "face-representations": {
+    "gif": "face-representations.gif",
+    "poster": "face-representations.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 190077,
+    "description": "Faces, landmarks & heatmaps \u2014 conceptual method animation"
+  },
+  "mlops": {
+    "gif": "mlops.gif",
+    "poster": "mlops.png",
+    "width": 600,
+    "height": 260,
+    "frames": 48,
+    "durationMs": 3840,
+    "bytes": 81287,
+    "description": "MLOps vision service \u2014 conceptual method animation"
+  }
+}

@@ -6,6 +6,10 @@ Main profile: https://alireza-ghadimi.github.io/
 
 Full profile: https://alireza-ghadimi.github.io/full-profile/
 
+Animated edition: https://alireza-ghadimi.github.io/animated/
+
+Animated full profile: https://alireza-ghadimi.github.io/animated/full-profile/
+
 The homepage presents the recent agent research as industry projects without naming its employer. The separate full profile includes the Huawei internship and OpenJiuwen team. Each profile downloads its matching résumé. The full profile is publicly accessible but uses `noindex`; this is an editorial presentation choice, not access control.
 
 ## Hosting
@@ -19,6 +23,9 @@ GitHub Pages serves the generated HTML, CSS, and JavaScript from the root of the
 - `index.html` and `full-profile/index.html`: generated pages; edit their sources above.
 - `app.js`: keyboard-accessible project tabs, native case-study dialogs, mobile menu, and email copying.
 - `styles.css`: responsive layout, print styles, and reduced-motion support.
+- `motion.css` and `motion.js`: separate animated edition with scroll reveals, portrait parallax, an unfolding timeline, card transitions, and a persistent pause control.
+- `animated/`: generated motion pages, using the same content and matching résumé variants as the classic edition.
+- `assets/project-motion/`: 15 original conceptual GIFs and static PNG posters; GIFs only play while visible and motion is enabled.
 - `assets/`: the website’s images, logos, and downloadable résumé.
 - `credits.html` and `assets/SOURCES-assets.json`: image sources and credits.
 
@@ -28,11 +35,30 @@ After editing the content, templates, CSS, JavaScript, or résumé PDFs:
 python3 scripts/build-site.py
 python3 scripts/check-site.py
 node --check app.js
+node --check motion.js
 ```
 
 The generator updates cache keys for styles, scripts, and résumé downloads. All fonts and visible assets are hosted locally. Static content is readable without JavaScript; JavaScript adds category filtering and detailed case studies.
 
 The hero uses the original supplied portrait. An SVG viewport crops out the chair and feet, and CSS applies a slight brightness increase. The face, clothes, and pose are not regenerated or reshaped.
+
+The animated edition respects the device's reduced-motion setting. Its pause control replaces GIFs with static posters, disables ambient motion and scroll transitions, and remembers the choice. Offscreen animations use posters to limit decoding work. Without JavaScript, the full project collection and static posters remain readable. Both animated pages use `noindex` and point to the matching classic page as canonical.
+
+To regenerate the 600×260 conceptual project GIFs (requires Python and Pillow):
+
+```sh
+python3 scripts/build-project-motion.py
+```
+
+Each animation has 48 frames and a 3.84-second loop. These are illustrative methods, not recordings or experimental results. The whole GIF set is about 2 MB. The script selects local system fonts; the committed rendered assets are ready to serve without installing anything.
+
+For the motion interaction checks, run a local server and use Node with Playwright installed:
+
+```sh
+node scripts/check-motion.cjs
+```
+
+`SITE_URL` can override `http://127.0.0.1:4173`; `CHROMIUM_PATH` can point to a local Chrome executable.
 
 ## Preview locally
 
