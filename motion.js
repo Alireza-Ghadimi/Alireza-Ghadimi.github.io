@@ -5,8 +5,6 @@
   if (!body.classList.contains('motion-edition')) return;
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
-  const toggle = document.querySelector('#motion-toggle');
-  const toggleLabel = toggle.querySelector('.motion-toggle-label');
   const hero = document.querySelector('.hero');
   const timeline = document.querySelector('.experience-list');
   const progress = document.querySelector('.reading-progress > span');
@@ -15,10 +13,8 @@
   const visibleDiagrams = new Set();
   const activeAnimations = new Set();
   const revealTargets = [];
-  let pausedByUser = false;
   let enabled = false;
   let frame = 0;
-  try { pausedByUser = localStorage.getItem('portfolio-motion') === 'paused'; } catch {}
 
   function animate(element, keyframes, options) {
     if (!enabled || !element?.animate) return;
@@ -117,13 +113,9 @@
   addEventListener('resize', requestScrollUpdate, {passive: true});
 
   function updateMotion() {
-    enabled = !preference.matches && !pausedByUser;
+    enabled = !preference.matches;
     body.classList.toggle('motion-enabled', enabled);
     body.classList.toggle('motion-paused', !enabled);
-    toggle.setAttribute('aria-pressed', String(!enabled));
-    toggle.disabled = preference.matches;
-    toggleLabel.textContent = preference.matches ? 'Reduced motion' : enabled ? 'Pause motion' : 'Resume motion';
-    toggle.title = preference.matches ? 'Following your device’s reduced-motion preference' : '';
     if (!enabled) {
       activeAnimations.forEach(animation => animation.cancel());
       activeAnimations.clear();
@@ -135,11 +127,6 @@
     diagrams.forEach(syncDiagram);
     requestScrollUpdate();
   }
-  toggle.addEventListener('click', () => {
-    pausedByUser = !pausedByUser;
-    try { localStorage.setItem('portfolio-motion', pausedByUser ? 'paused' : 'running'); } catch {}
-    updateMotion();
-  });
   preference.addEventListener('change', updateMotion);
   document.addEventListener('visibilitychange', () => {
     diagrams.forEach(syncDiagram);

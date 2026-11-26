@@ -49,7 +49,7 @@ for relative in sorted(pages):
         assert all(urlsplit(url).path == 'assets/Alireza-Ghadimi-Resume.pdf' for url in page.resumes)
         assert len([i for i in page.ids if i.startswith('case-')]) == 15
         assert source.count('class="project-motion"') == 15
-        assert 'id="motion-toggle"' in source and 'noindex' not in source
+        assert 'id="motion-toggle"' not in source and 'noindex' not in source
         assert '<link rel="canonical" href="https://alireza-ghadimi.github.io/">' in source
     elif relative.startswith('animated/'):
         destination = '../' if relative.endswith('/index.html') else '../credits.html'

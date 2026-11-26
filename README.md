@@ -19,6 +19,6 @@ Visit http://127.0.0.1:4173/. Bookmarks to the older `/animated/` address redire
 - `content/portfolio.json` contains project descriptions, categories, evidence and links.
 - `scripts/build-site.py` generates the homepage and image credits.
 - `app.js` handles project tabs, case studies, navigation and copying the contact email.
-- `motion.js` and `motion.css` control scroll effects and project animations. Visitors can pause motion, and the page respects their device’s reduced-motion preference.
+- `motion.js` and `motion.css` control scroll effects and project animations. The page follows the visitor’s device setting for reduced motion.
 - `assets/project-motion/` contains illustrative GIFs and static posters. Rebuild them with `python3 scripts/build-project-motion.py` and Pillow.
 - `credits.html` lists the sources of images, organization logos and fonts.
