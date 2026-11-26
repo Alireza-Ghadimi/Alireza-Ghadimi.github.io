@@ -15,6 +15,16 @@ def asset(name):
 def link(label, url, cls='text-link'):
     return f'<a class="{cls}" href="{e(url)}" target="_blank" rel="noopener noreferrer">{e(label)}</a>'
 
+def preview_metadata():
+    return f'''<meta property="og:image" content="{BASE}assets/ag-signature-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Alireza Ghadimi’s calligraphic AG initials">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{BASE}assets/ag-signature-preview.png">
+<meta name="twitter:image:alt" content="Alireza Ghadimi’s calligraphic AG initials">'''
+
 def signature():
     return f'<span class="signature-mark"><img src="{asset("ag-signature.png")}" width="1254" height="1254" alt=""></span>'
 
@@ -83,7 +93,7 @@ def render():
     motion_css_hash = hashlib.sha256((ROOT / 'motion.css').read_bytes()).hexdigest()[:10]
     motion_js_hash = hashlib.sha256((ROOT / 'motion.js').read_bytes()).hexdigest()[:10]
     return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9f6"><meta name="description" content="Alireza Ghadimi: agentic AI, generative models, and efficient LLM research. Waterloo Computer Science PhD student studying learned agent skills, execution feedback, and multi-token generation."><meta property="og:title" content="Alireza Ghadimi — Agentic AI & Generative Models"><meta property="og:description" content="Efficient models. Adaptive agents. Research on agent learning, compact skills, and generative AI at the University of Waterloo."><meta property="og:type" content="website"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE}assets/alireza-portrait-original.jpg"><link rel="canonical" href="{canonical}"><title>Alireza Ghadimi — Motion Edition</title><link rel="icon" href="{asset('favicon.svg')}" type="image/svg+xml"><link rel="preload" href="{asset('fonts/instrument-serif-normal-400.woff')}" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="{asset('fonts/fonts.css')}"><link rel="stylesheet" href="styles.css?v={css_hash}"><script src="app.js?v={js_hash}" defer></script><script type="application/ld+json">{json.dumps(structured)}</script><link rel="stylesheet" href="motion.css?v={motion_css_hash}"><script src="motion.js?v={motion_js_hash}" defer></script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9f6"><meta name="description" content="Alireza Ghadimi: agentic AI, generative models, and efficient LLM research. Waterloo Computer Science PhD student studying learned agent skills, execution feedback, and multi-token generation."><meta property="og:title" content="Alireza Ghadimi — Agentic AI & Generative Models"><meta property="og:description" content="Efficient models. Adaptive agents. Research on agent learning, compact skills, and generative AI at the University of Waterloo."><meta property="og:type" content="website"><meta property="og:url" content="{canonical}">{preview_metadata()}<link rel="canonical" href="{canonical}"><title>Alireza Ghadimi — Motion Edition</title><link rel="icon" href="{asset('favicon.svg')}" type="image/svg+xml"><link rel="preload" href="{asset('fonts/instrument-serif-normal-400.woff')}" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="{asset('fonts/fonts.css')}"><link rel="stylesheet" href="styles.css?v={css_hash}"><script src="app.js?v={js_hash}" defer></script><script type="application/ld+json">{json.dumps(structured)}</script><link rel="stylesheet" href="motion.css?v={motion_css_hash}"><script src="motion.js?v={motion_js_hash}" defer></script></head>
 <body class="motion-edition"><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="container header-inner"><span class="edition-label">Motion edition</span><a class="brand" href="#about" aria-label="Alireza Ghadimi home">{signature()}</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">☰</span></button><nav id="main-nav" aria-label="Main navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#research">Research</a><a href="#background">Background</a><a class="nav-contact" href="#contact">Let’s talk</a></nav></div></header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -110,7 +120,7 @@ def legacy_redirect(destination):
     # readers with JavaScript disabled.
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
-<title>Alireza Ghadimi</title><link rel="canonical" href="{BASE}{destination}">
+<title>Alireza Ghadimi</title>{preview_metadata() if not destination else ''}<link rel="canonical" href="{BASE}{destination}">
 <script>location.replace("../{destination}" + location.search + location.hash);</script>
 <meta http-equiv="refresh" content="0; url=../{destination}"></head>
 <body><a href="../{destination}">Continue to the portfolio</a></body></html>
