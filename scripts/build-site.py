@@ -135,6 +135,14 @@ def education(prefix):
         out.append(f'''<article class="education-card"><a href="{url}" target="_blank" rel="noopener noreferrer" aria-label="Visit {e(name)}"><img class="campus-photo" src="{asset(prefix,'institution-'+key+'-campus.'+ext)}" alt="{e(alt)}" width="600" height="400" loading="lazy"></a><div class="education-body"><div class="education-top"><img class="education-logo logo-{key}" src="{asset(prefix,logo)}" alt="" loading="lazy"><span>{years}</span></div><h3>{e(name)}</h3><p class="degree">{degree}</p><p>{focus}</p></div></article>''')
     return ''.join(out)
 
+def profile_bio(full):
+    return 'I research how language-model agents learn from execution feedback and how generative models can do more with less computation. I’m a Computer Science PhD student at the University of Waterloo and an ML Research Scientist Intern at Huawei.' if full else 'I research how language-model agents learn from execution feedback and how generative models can do more with less computation. I’m a Computer Science PhD student at the University of Waterloo, building on experience taking ML systems into production.'
+
+def affiliation_logos(prefix):
+    logos=[('Waterloo','institution-waterloo-logo.png','waterloo'),('University of Toronto','institution-toronto-logo.svg','toronto'),('Amirkabir University','institution-amirkabir-logo.png','amirkabir')]
+    logos.extend([('Strayos','company-strayos-logo.svg','strayos'),('Fusion Analytics','company-fusion-logo.png','fusion'),('EnerSoft','company-enersoft-logo.png','enersoft')])
+    return ''.join(f'<img src="{asset(prefix,file)}" class="logo-{key}" alt="{name}" loading="lazy">' for name,file,key in logos)
+
 def render(full=False, motion=False):
     prefix=('../../' if full else '../') if motion else ('../' if full else '')
     resume='Alireza-Ghadimi-Resume-Full.pdf' if full else 'Alireza-Ghadimi-Resume.pdf'
@@ -145,10 +153,8 @@ def render(full=False, motion=False):
     js_hash=hashlib.sha256((ROOT/'app.js').read_bytes()).hexdigest()[:10]
     canonical=BASE+('full-profile/' if full else '')
     category_json=json.dumps(DATA['categories'])
-    bio='I research how language-model agents learn from execution feedback and how generative models can do more with less computation. I’m a Computer Science PhD student at the University of Waterloo and an ML Research Scientist Intern at Huawei.' if full else 'I research how language-model agents learn from execution feedback and how generative models can do more with less computation. I’m a Computer Science PhD student at the University of Waterloo, building on experience taking ML systems into production.'
-    logos=[('Waterloo','institution-waterloo-logo.png','waterloo'),('University of Toronto','institution-toronto-logo.svg','toronto'),('Amirkabir University','institution-amirkabir-logo.png','amirkabir')]
-    logos.extend([('Strayos','company-strayos-logo.svg','strayos'),('Fusion Analytics','company-fusion-logo.png','fusion'),('EnerSoft','company-enersoft-logo.png','enersoft')])
-    logo_html=''.join(f'<img src="{asset(prefix,file)}" class="logo-{key}" alt="{name}" loading="lazy">' for name,file,key in logos)
+    bio=profile_bio(full)
+    logo_html=affiliation_logos(prefix)
     tabs=''.join(f'<button id="tab-{c["id"]}" type="button" role="tab" aria-selected="{str(i==0).lower()}" aria-controls="work-panel" tabindex="{0 if i==0 else -1}" data-filter="{c["id"]}">{e(c["label"])}</button>' for i,c in enumerate(DATA['categories']))
     structured={'@context':'https://schema.org','@type':'Person','name':'Alireza Ghadimi','url':canonical,'jobTitle':'ML Research Scientist and Computer Science PhD Student','sameAs':['https://github.com/Alireza-Ghadimi','https://www.linkedin.com/in/Alireza-Ghadimi'],'affiliation':{'@type':'CollegeOrUniversity','name':'University of Waterloo'}}
     page=f'''<!doctype html>
@@ -203,4 +209,6 @@ if __name__=='__main__':
         folder.mkdir(parents=True,exist_ok=True)
         (folder/'index.html').write_text(render(full,motion=True))
         (folder/'credits.html').write_text(credits(full,motion=True))
-    print('Built classic and animated editions, each with neutral and full profiles.')
+    import subprocess, sys
+    subprocess.run([sys.executable, str(ROOT / 'scripts/build-studio.py')], check=True)
+    print('Built classic, animated and studio editions, each with neutral and full profiles.')

@@ -10,6 +10,8 @@ Animated edition: https://alireza-ghadimi.github.io/animated/
 
 Animated full profile: https://alireza-ghadimi.github.io/animated/full-profile/
 
+[Research Studio](https://alireza-ghadimi.github.io/studio/) and its [full profile](https://alireza-ghadimi.github.io/studio/full-profile/) use the same project catalog, case studies, and résumés. Its templates are in `scripts/build-studio.py` and `scripts/studio_work.py`. Styles, navigation, and animated research symbols live in `studio/`.
+
 The homepage presents the recent agent research as industry projects without naming its employer. The separate full profile includes the Huawei internship and OpenJiuwen team. Each profile downloads its matching résumé. The full profile is publicly accessible but uses `noindex`; this is an editorial presentation choice, not access control.
 
 ## Hosting
